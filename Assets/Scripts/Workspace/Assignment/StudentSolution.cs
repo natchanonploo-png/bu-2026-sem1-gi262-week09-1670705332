@@ -97,12 +97,38 @@ namespace Assignment
 
         public string ASN01_ReverseString(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+
+            foreach (char c in str)
+            {
+                stack.Push(c);
+            }
+
+            char[] reversedArray = new char[str.Length];
+            for (int i = 0; i < str.Length; i++)
+            {
+                reversedArray[i] = stack.Pop();
+            }
+
+            return new string(reversedArray);
         }
 
         public bool ASN02_StackPalindrome(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+            foreach (char c in str)
+            {
+                stack.Push(c);
+            }
+
+            char[] reversedArray = new char[str.Length];
+            for (int i = 0; i < str.Length; i++)
+            {
+                reversedArray[i] = stack.Pop();
+            }
+            string reversedString = new string(reversedArray);
+
+            return str == reversedString;
         }
 
         #endregion
@@ -111,7 +137,29 @@ namespace Assignment
 
         public bool EX01_ParenthesesChecker(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+
+            foreach (char c in str)
+            {
+                if (c == '(' || c == '[' || c == '{')
+                {
+                    stack.Push(c);
+                }
+                else if (c == ')' || c == ']' || c == '}')
+                {
+                    if (stack.Count == 0) return false;
+
+                    char top = stack.Pop();
+                    if ((c == ')' && top != '(') ||
+                        (c == ']' && top != '[') ||
+                        (c == '}' && top != '{'))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return stack.Count == 0;
         }
 
         #endregion
